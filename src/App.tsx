@@ -1,26 +1,52 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 
-function App() {
+import MonzoAuthorizer from './components/monzoAuthorizer';
+import MoneyTracker from './components/moneyTracker';
+import './App.css';
+import HomePage from './components/homeComponent';
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+        <Switch>
+          <Route exact path="/">
+            <HomePage />
+          </Route>
+          <PrivateRoute path="/authorize">
+            <MonzoAuthorizer />
+          </PrivateRoute>
+          <PrivateRoute path="/moneytracker">
+            <MoneyTracker />
+          </PrivateRoute>
+        </Switch>
+    </Router>
   );
 }
 
-export default App;
+// A wrapper for <Route> that redirects to the login
+// screen if you're not yet authenticated.
+function PrivateRoute({ children, ...rest }) {
+  return (
+    <Route
+      {...rest}
+      render={({ location }) =>
+        JSON.parse(sessionStorage.getItem('isAuth') || 'false') ? (
+          children
+        ) : (
+          <Redirect
+            to={{
+              pathname: "/",
+              state: { from: location }
+            }}
+          />
+        )
+      }
+    />
+  );
+}

@@ -1,0 +1,53 @@
+th, td {
+    padding: 15px;
+    border-bottom: 1px solid #ffc800;
+}
+#transactionTable {
+    border-collapse: collapse;
+    width: 50%;
+    align-self: flex-start;
+}
+
+#detailsContainer {
+    display: flex;
+    width: 100%;
+}
+
+caption {
+    color: #FFFFFF;
+    font-weight: 900;
+    font-size: larger;
+}
+
+caption:hov {
+    transform: scale(1.1);
+}
+
+.transactionRow {
+    color: #FF8427;
+}
+
+.transactionHeader {
+    height: 50px;
+    color: #FFFFFF;
+}
+
+#categoryData {
+    width: 10%;
+}
+
+#dateData {
+    width: 20%;
+    text-align: center;
+}
+
+#amountData {
+    width: 20%;
+    text-align: center;
+}
+
+#descriptionData {
+    width: 50%;
+    text-align: center;
+}
+ 

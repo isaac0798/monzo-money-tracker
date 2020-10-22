@@ -1,0 +1,10 @@
+#trComponents {
+    display: flex;
+    width: 100%;
+}
+
+#rhComponents {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
