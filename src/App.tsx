@@ -36,12 +36,12 @@ function PrivateRoute({ children, ...rest }) {
     <Route
       {...rest}
       render={({ location }) =>
-        JSON.parse(sessionStorage.getItem('isAuth') || 'false') ? (
+        JSON.parse(sessionStorage.getItem('isAuth') || 'true') ? (
           children
         ) : (
           <Redirect
             to={{
-              pathname: "/",
+              pathname: "/login",
               state: { from: location }
             }}
           />

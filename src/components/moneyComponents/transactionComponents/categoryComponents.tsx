@@ -16,12 +16,11 @@ const chartConfig = {
     },
   };
 
-type graphProps = {graphData: any};
-const CategoryComponents = ({graphData}: graphProps) => {
+type graphProps = {graphData: any, year: string};
+const CategoryComponents = ({graphData, year}: graphProps) => {
     const categoryContainer = useRef(null);
     const [chartInstance, setChartInstance] = useState(null);
     const [chartData, setChartData] = useState(chartConfig);
-    const [year, setYear] = useState('2020');
 
     console.log(graphData[year]);
     const months = Object.keys(graphData[year]);
@@ -58,7 +57,7 @@ const CategoryComponents = ({graphData}: graphProps) => {
           const newChartInstance = new Chartjs(categoryContainer.current, chartConfig);
           setChartInstance(newChartInstance);
         }
-      }, [categoryContainer]);
+      }, [categoryContainer, year]);
 
     return (
         <div id="componentContainer">

@@ -6,6 +6,7 @@ import getLabelsPerYear from '../../../utilities/graphComponentUtitliteis/getLab
 import getMonthlyTransactionCount from '../../../utilities/graphComponentUtitliteis/getMonthlyTransactionCount';
 import '../../../css/graphComponent.css';
 import getMonthlyAmountSpent from "../../../utilities/graphComponentUtitliteis/getMonthlyAmountSpent";
+import { setSyntheticTrailingComments } from "typescript";
 
 let labels;
 let data;
@@ -41,12 +42,11 @@ const chartConfig = {
   };
 
 //make sorted transactions interface
-type graphProps = {graphData: any};
-const GraphComponent = ({graphData}: graphProps) => {
+type graphProps = {graphData: any, year: string};
+const GraphComponent = ({graphData, year}: graphProps) => {
     const graphContainer = useRef(null);
     const [chartInstance, setChartInstance] = useState(null);
     const [chartData, setChartData] = useState(chartConfig);
-    const [year, setYear] = useState('2020');
 
     chartConfig.data.labels = getLabelsPerYear(graphData[year]);
     chartConfig.data.datasets[0].data = getMonthlyTransactionCount(graphData[year]);
@@ -57,11 +57,11 @@ const GraphComponent = ({graphData}: graphProps) => {
           const newChartInstance = new Chartjs(graphContainer.current, chartConfig);
           setChartInstance(newChartInstance);
         }
-      }, [graphContainer]);
+      }, [graphContainer, year]);
 
     return (
         <div id="graphContainer">
-            <canvas ref={graphContainer} />
+          <canvas ref={graphContainer} />
         </div>
     );
 }

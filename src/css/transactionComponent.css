@@ -8,3 +8,7 @@
     flex-direction: column;
     width: 50%;
 }
+
+#yearSelector {
+    width: 25%;
+}
